@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[.NET中委托与lambda表达式的使用]]></title>
+    <url>%2F2019%2F06%2F01%2FNET%E4%B8%AD%E5%A7%94%E6%89%98%E4%B8%8Elambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[委托是一种数据类型，是用来存放方法的。 为什么要使用委托？例：现在运用控制台输出list数据中年龄大于或小于21的姓名，下面为一般写法。12345678910111213141516171819202122232425262728293031323334353637383940414243444546class Program&#123; public class Person &#123; public string Name &#123; get; set; &#125; public int Age &#123; get; set; &#125; &#125; static void Main(string[] args) &#123; //创建数据对象 List&lt;Person&gt; list = new List&lt;Person&gt;() &#123; new Person()&#123; Name="张三",Age=20&#125;, new Person()&#123; Name="李四",Age=21&#125;, new Person()&#123; Name="小明",Age=22&#125;, new Person()&#123; Name="小红",Age=23&#125;, &#125;; List&lt;Person&gt; person = FilterByAge(list,true,21); foreach (var item in person) &#123; Console.WriteLine(item.Name);//输出 &#125; Console.ReadLine(); Filter(list, p =&gt; p.Name.Contains("a")); &#125; static List&lt;Person&gt; FilterByAge(List&lt;Person&gt; list,bool opreate,int age)//具体方法实现 &#123; List&lt;Person&gt; newList=new List&lt;Person&gt;(); foreach(var item in list) &#123; if(opreate) &#123; if(item.Age&gt;age) &#123; newList.Add(item); &#125; &#125; else &#123; if(item.Age&lt;age) &#123; newList.Add(item); &#125; &#125; &#125; return newList; &#125;&#125; 由此可见，上面的方法判断较多且代码可读性较差，下面我们来运用委托实现。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748class Program&#123; public delegate bool FilterPerson(Person p);//新建一个委托，相当于定义了一个方法的模板 public class Person &#123; public string Name &#123; get; set; &#125; public int Age &#123; get; set; &#125; &#125; stattic bool FilterByAge(Person p) &#123; if(p.Age&gt;21) &#123; if(p.Age&gt;21) &#123; return true; &#125; return false &#125; &#125; static void Main(string[] args) &#123; //创建数据对象 List&lt;Person&gt; list = new List&lt;Person&gt;() &#123; new Person()&#123; Name="张三",Age=20&#125;, new Person()&#123; Name="李四",Age=21&#125;, new Person()&#123; Name="小明",Age=22&#125;, new Person()&#123; Name="小红",Age=23&#125;, &#125;; FilterPerson filter=new FilterPerson(FilterByAge); List&lt;Person&gt; person=Filter(list,filter); foreach (var item in person) &#123; Console.WriteLine(item.Name);//输出 &#125; Console.ReadLine(); &#125; static List&lt;Person&gt; Filter(List&lt;Person&gt; list,FilterPerson fliter)//具体方法实现 &#123; List&lt;Person&gt; newList=new List&lt;Person&gt;(); foreach(var item in list) &#123; if(filiter(item)) &#123; newList.Add(item); &#125; &#125; return newList; &#125;&#125; 上面的代码的写法还是能够继续简化，下面我们用到了lambda表达式来简化代码：1234567891011121314151617181920212223242526272829303132333435363738class Program &#123; public delegate bool FilterPerson(Person p); public class Person &#123; public string Name &#123; get; set; &#125; public int Age &#123; get; set; &#125; &#125; static void Main(string[] args) &#123; List&lt;Person&gt; list = new List&lt;Person&gt;() &#123; new Person()&#123; Name="张三",Age=20&#125;, new Person()&#123; Name="李四",Age=21&#125;, new Person()&#123; Name="小明",Age=22&#125;, new Person()&#123; Name="小红",Age=23&#125;, &#125;; List&lt;Person&gt; person= Filter(list, p =&gt; p.Age&gt;21);//lambda 语法,格式："()=&gt;&#123;&#125;" foreach (var item in person) &#123; Console.WriteLine(item.Name); &#125; Console.ReadLine(); &#125; static List&lt;Person&gt; Filter(List&lt;Person&gt; list,FilterPerson filter) &#123; List&lt;Person&gt; newList = new List&lt;Person&gt;(); foreach (var item in list) &#123; if (filter(item)) &#123; newList.Add(item); &#125; &#125; return newList; &#125; &#125; lambda 语法：用来简化声明方法，多个参数时用逗号隔开，当只有一个参数时，大括号可以省略掉，方法体只有一行代码，叫lambda 表达式，大括号可以省略掉，自动将表达式的结果返回。 泛型委托随着业务需求的增多，数据类型也会变得更加多样化，那将意味着需要定义多个委托，这就又造成了代码的重复，这时候我们便用到了泛型委托。1public delegate T AddDelegate&lt;T&gt;(T a,T b); 但是系统早已为我们准备好了三种类型的委托：（1）Action（）没有参数，没有返回值。（2）Action&lt;&gt;,最多传16个参数，没有返回值。（3）Func&lt;&gt;,最后一个类型是返回类型，其余都是输入类型。所以说委托一般是不需要我们定义的，系统所提供的三种委托基本可以适应大多数使用场景。]]></content>
+      <categories>
+        <category>.NET基础</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[.NET总结（常见误区）]]></title>
+    <url>%2F2019%2F06%2F01%2FNET%E6%80%BB%E7%BB%93%EF%BC%88%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[内存分配模式主要分为两种，栈和堆。黄金定律：引用类型一定分配在堆上，值类型的局部变量存储在栈上，而类的值类型成员存储在堆上。 思考一1234int a=10;int b=a;b=20;a=?; 很显然，执行完这段代码后a的值并没有被改变，a的值还是10. 思考二12345678910111213141516class Person&#123; public string Name &#123;get;set;&#125; public int Age&#123;get;set;&#125;&#125;Person p=new Person();p.Name="张三";p.Age=20;Person p1=p;p1.Name="李四";p1.Age=21;Console.WriteLine(p.Name);Console.WriteLine(p.Age);Console.ReadLine(); 这回的输出结果变为了李四与21。由于Person p1在栈内直接获取了Person p的堆地址，而不是数据，所以在修改Person p1内的数据时，便会根据地址修改堆内的相应数据，从而修改了Person p的数据，所以输出结果会变为变为李四与21。 未将对象引用到实例当栈内A地址为NULL时，便会引发未将对象引用到实例的错误。 垃圾回收值类型（int，double，bool等）占用的空间在方法执行结束会被马上释放，引用类型（string，数组，class等）占用的空间在方法执行结束后不会被马上释放，具体什么时间释放由垃圾回收器（GC）来决定。]]></content>
+      <categories>
+        <category>.NET基础</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+        <tag>基础</tag>
+      </tags>
+  </entry>
+</search>
