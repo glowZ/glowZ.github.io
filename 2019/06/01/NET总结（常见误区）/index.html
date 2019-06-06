@@ -114,10 +114,10 @@
 <meta property="og:site_name" content="张同学">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://linjiaxiaozhang.com/images/文章摘要图/chahua2.jpg">
-<meta property="og:image" content="http://linjiaxiaozhang.com/images/文章摘要图/shilitu1.png">
-<meta property="og:image" content="http://linjiaxiaozhang.com/images/文章摘要图/shilitu2.png">
-<meta property="og:image" content="http://linjiaxiaozhang.com/images/文章摘要图/shilitu3.png">
-<meta property="og:updated_time" content="2019-06-02T06:58:00.152Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190528185723962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDg3NzM4,size_14,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190528192932882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDg3NzM4,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190528193818442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDg3NzM4,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-06-06T01:30:35.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=".NET总结（常见误区）">
 <meta name="twitter:image" content="http://linjiaxiaozhang.com/images/文章摘要图/chahua2.jpg">
@@ -450,7 +450,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-02 14:58:00" itemprop="dateModified" datetime="2019-06-02T14:58:00+08:00">2019-06-02</time>
+                <time title="修改时间：2019-06-06 09:30:35" itemprop="dateModified" datetime="2019-06-06T09:30:35+08:00">2019-06-06</time>
               
             
           </span>
@@ -527,11 +527,12 @@
 <hr>
 <h2 id="内存分配模式"><a href="#内存分配模式" class="headerlink" title="内存分配模式"></a>内存分配模式</h2><p>主要分为两种，栈和堆。<br><strong>黄金定律</strong>：引用类型一定分配在堆上，值类型的局部变量存储在栈上，而类的值类型成员存储在堆上。</p>
 <h2 id="思考一"><a href="#思考一" class="headerlink" title="思考一"></a>思考一</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int a=<span class="number">10</span>;</span><br><span class="line">int b=a;</span><br><span class="line">b=<span class="number">20</span>;</span><br><span class="line">a=?;</span><br></pre></td></tr></table></figure>
-<p>很显然，执行完这段代码后a的值并没有被改变，a的值还是10.<br><img src="/images/文章摘要图/shilitu1.png"></p>
+<p>很显然，执行完这段代码后a的值并没有被改变，a的值还是10.<br><img src="https://img-blog.csdnimg.cn/20190528185723962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDg3NzM4,size_14,color_FFFFFF,t_70" alt="示例图"></p>
 <h2 id="思考二"><a href="#思考二" class="headerlink" title="思考二"></a>思考二</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	public string Name &#123;<span class="keyword">get</span>;<span class="keyword">set</span>;&#125;</span><br><span class="line">	public int Age&#123;<span class="keyword">get</span>;<span class="keyword">set</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line">Person p=new Person();</span><br><span class="line">p.Name="张三";</span><br><span class="line">p.Age=20;</span><br><span class="line"></span><br><span class="line">Person p1=p;</span><br><span class="line">p1.Name="李四";</span><br><span class="line">p1.Age=21;</span><br><span class="line"></span><br><span class="line">Console.WriteLine(p.Name);</span><br><span class="line">Console.WriteLine(p.Age);</span><br><span class="line">Console.ReadLine();</span><br></pre></td></tr></table></figure>
-<p>这回的输出结果变为了<strong>李四</strong>与<strong>21</strong>。<br><img src="/images/文章摘要图/shilitu2.png"><br>由于Person p1在栈内直接获取了Person p的堆地址，而不是数据，所以在修改Person p1内的数据时，便会根据地址修改堆内的相应数据，从而修改了Person p的数据，所以输出结果会变为变为李四与21。</p>
-<h2 id="未将对象引用到实例"><a href="#未将对象引用到实例" class="headerlink" title="未将对象引用到实例"></a>未将对象引用到实例</h2><p><img src="/images/文章摘要图/shilitu3.png"><br>当栈内A地址为NULL时，便会引发未将对象引用到实例的错误。</p>
+<p>这回的输出结果变为了<strong>李四</strong>与<strong>21</strong>。<img src="https://img-blog.csdnimg.cn/20190528192932882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDg3NzM4,size_16,color_FFFFFF,t_70" alt="示例图"><br>由于Person p1在栈内直接获取了Person p的堆地址，而不是数据，所以在修改Person p1内的数据时，便会根据地址修改堆内的相应数据，从而修改了Person p的数据，所以输出结果会变为变为李四与21。</p>
+<h2 id="未将对象引用到实例"><a href="#未将对象引用到实例" class="headerlink" title="未将对象引用到实例"></a>未将对象引用到实例<img src="https://img-blog.csdnimg.cn/20190528193818442.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNDg3NzM4,size_16,color_FFFFFF,t_70" alt="示例图"></h2><p>当栈内A地址为NULL时，便会引发未将对象引用到实例的错误。</p>
 <h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><p>值类型（int，double，bool等）占用的空间在方法执行结束会被马上释放，引用类型（string，数组，class等）占用的空间在方法执行结束后不会被马上释放，具体什么时间释放由垃圾回收器（GC）来决定。</p>
+<hr>
 
       
     </div>
